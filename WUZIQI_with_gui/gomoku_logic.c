@@ -161,7 +161,7 @@ bool gomoku_check_win(int row, int col) {
 void gomoku_switch_player(void) { currentPlayer_internal = (currentPlayer_internal == 'X') ? 'O' : 'X'; }
 char gomoku_current_player(void) { return currentPlayer_internal; }
 
-/* ---------- 威胁探测（保留原实现） ---------- */
+/* ---------- 威胁探测 ---------- */
 void gomoku_detect_threats(void) {
     memset(threatMarks_internal, 0, sizeof(threatMarks_internal));
     char opponent = (currentPlayer_internal == 'X') ? 'O' : 'X';

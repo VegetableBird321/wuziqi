@@ -40,6 +40,7 @@ int           winFlag = 0;
 char          messageBuffer[256] = "";
 Uint32        messageStart = 0;
 int           messageDuration = 0;
+int           playerWin = 0;
 
 Button menuButtons[4];
 Button aiSelectButtons[2];
@@ -137,11 +138,14 @@ void exitGame(void) {
 }
 
 void undoMove(void) {
-    if (aiEnabled && winFlag) gomoku_switch_player();
-
-    if (gomoku_undo_moves()) {
-        winFlag = 0;
-        showMessage("Undid last two moves", 1);
+    if (playerWin == 1)showMessage("Lets just rebattle", 1);
+    else {
+        
+        if (aiEnabled && winFlag) gomoku_switch_player();
+        if (gomoku_undo_moves()) {
+            winFlag = 0;
+            showMessage("Undid last two moves", 1);
+        }
     }
 }
 
@@ -189,6 +193,7 @@ void replayGame(void) {
 void restartGame(void) {
     // 完全重置对局状态
     gomoku_init();
+    playerWin = 0;
     winFlag = 0;
     aiEnabled = false;
     aiGoesFirst = false;
@@ -333,9 +338,9 @@ bool handlePlayEvent(SDL_Event* e) {
                 int r = e->button.y / CELL_SIZE;
                 int c = e->button.x / CELL_SIZE;
                 if (gomoku_make_move(r, c)) {
-
                     if (gomoku_check_win(r, c)) {
                         winFlag = 1;
+                        playerWin = 1;
                         gomoku_switch_player();
                         if (aiEnabled) {
                             char winner = gomoku_current_player();
