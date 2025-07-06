@@ -4,8 +4,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define GOMOKU_SIZE 15     /* 如已在头文件定义，可删除 */
-#define MAX_DEPTH 2        /* 搜索深度，可根据性能调整 */
+#define GOMOKU_SIZE 15    
+#define MAX_DEPTH 2    
 
 /* ---------- 棋盘数据 ---------- */
 static char board_internal[GOMOKU_SIZE][GOMOKU_SIZE];
