@@ -130,8 +130,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="gomoku_gui.cpp" />
-    <ClCompile Include="gomoku_logic.cpp" />
+    <ClCompile Include="gomoku_gui.c" />
+    <ClCompile Include="gomoku_logic.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gomoku_logic.h" />
