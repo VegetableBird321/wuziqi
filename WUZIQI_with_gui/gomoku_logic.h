@@ -133,6 +133,9 @@ extern "C" {
 	 */
 	void gomoku_clear_touch(void);
 
+	void gomoku_get_ai_move(int* bestRow, int* bestCol);
+
+
 #ifdef __cplusplus
 }
 #endif
