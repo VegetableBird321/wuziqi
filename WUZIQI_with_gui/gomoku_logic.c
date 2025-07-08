@@ -16,12 +16,10 @@ static int  winMarks_internal[GOMOKU_SIZE][GOMOKU_SIZE];
 static int  threatMarks_internal[GOMOKU_SIZE][GOMOKU_SIZE];
 static bool touchedFlag_internal;
 static char touchedPlayer_internal;
-#define IN_BOARD(r,c) ((r) >= 0 && (r) < GOMOKU_SIZE && \
-                       (c) >= 0 && (c) < GOMOKU_SIZE)
+#define IN_BOARD(r,c) ((r) >= 0 && (r) < GOMOKU_SIZE &&  (c) >= 0 && (c) < GOMOKU_SIZE)
 
 /* 统计连续同色子长度与活口数 */
-static void count_segment(int r, int c, int dr, int dc,
-    char me, int* len, int* openEnds)
+static void count_segment(int r, int c, int dr, int dc, char me, int* len, int* openEnds)
 {
     *len = 1;
     *openEnds = 0;
@@ -224,7 +222,7 @@ void gomoku_clear_touch(void) {
     touchedFlag_internal = false; touchedPlayer_internal = '\0';
 }
 
-
+/* ---------- minimax --------- */
 static int evaluate_board(char aiPlayer)
 {
     const char opp = (aiPlayer == 'X') ? 'O' : 'X';
@@ -247,7 +245,7 @@ static int evaluate_board(char aiPlayer)
                 if (len >= 5)  segScore = 100000;
                 else if (len == 4 && openEnds == 2)    segScore = 10000;   
                 else if (len == 4 && openEnds == 1)    segScore = 1000;    
-                else if (len == 3 && openEnds == 2)    segScore = 100;
+                else if (len == 3 && openEnds == 2)    segScore = 200;
                 else if (len == 3 && openEnds == 1)    segScore = 30;
                 else if (len == 2 && openEnds == 2)    segScore = 10;
                 else if (len == 2 && openEnds == 1)    segScore = 3;

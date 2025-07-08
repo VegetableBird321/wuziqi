@@ -133,12 +133,13 @@ void aiStartPlayer(void) {
 }
 
 void exitGame(void) {
-    SDL_Event ev; ev.type = SDL_QUIT;
-    SDL_PushEvent(&ev);
+    reviewStep = 0;
+    savedMoveCount = 0;
+    appState = STATE_MENU;
 }
 
 void undoMove(void) {
-    if (playerWin == 1)showMessage("Lets just rebattle", 1);
+    if (playerWin == 1&&aiEnabled)showMessage("Lets just rebattle", 1);
     else {
         
         if (aiEnabled && winFlag) gomoku_switch_player();
