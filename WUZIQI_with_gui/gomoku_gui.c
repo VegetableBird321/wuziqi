@@ -138,13 +138,20 @@ void exitGame(void) {
     appState = STATE_MENU;
 }
 
+void exitexe(void) {
+    SDL_Event e;
+    e.type = SDL_QUIT;
+    SDL_PushEvent(&e);
+}
+
 void undoMove(void) {
-    if (playerWin == 1&&aiEnabled)showMessage("Lets just rebattle", 1);
+    if (playerWin == 1 && aiEnabled == 1 && winFlag)showMessage("Lets just rebattle", 1);
     else {
         
         if (aiEnabled && winFlag) gomoku_switch_player();
         if (gomoku_undo_moves()) {
             winFlag = 0;
+            playerWin = 0;
             showMessage("Undid last two moves", 1);
         }
     }
@@ -208,7 +215,7 @@ void restartGame(void) {
 
 void setupMenuButtons(void) {
     const char* labels[4] = { "Start","Load","AI Battle","Exit" };
-    void (*cbs[4])(void) = { startGame, loadGamePlay, aiBattle, exitGame };
+    void (*cbs[4])(void) = { startGame, loadGamePlay, aiBattle, exitexe };
     int w = 180, h = 50, x0 = (WINDOW_WIDTH - w) / 2;
     for (int i = 0; i < 4; ++i) {
         menuButtons[i].rect.x = x0;
